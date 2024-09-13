@@ -236,6 +236,7 @@ function App(){
     <p>The sub of any two no is: {sub(3,4)}</p>
     <p>The mul of any two no is: {mul(3,4)}</p>
     <p>The div of any two no is: {div(3,4)}</p>
+    <p>The div of any two no is: {div(6,3)}</p>
     </>
   );
 }
