@@ -34,3 +34,11 @@ const GetDataComponent = () => {
 };
 
 export default GetDataComponent;
+
+
+
+
+
+
+
+
