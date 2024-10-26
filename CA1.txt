@@ -1,0 +1,144 @@
+
+import React, { useEffect, useState } from 'react';
+
+function App() {
+  const [students, setStudents] = useState([]);
+  const [basketballPlayer, setBasketballPlayer] = useState(null);
+  const [activities, setActivities] = useState([]);
+
+  useEffect(() => {
+   
+    const students1 = [
+      { name: 'John', subject: 'Math', grade: 65, extracurricular: ['Basketball', 'Debate'] },
+      { name: 'Alice', subject: 'English', grade: 50, extracurricular: ['Music', 'Drama'] },
+    ];
+
+    const students2 = [
+      { name: 'Bob', subject: 'Science', grade: 75, extracurricular: ['Basketball', 'Chess'] },
+      { name: 'Eve', subject: 'Math', grade: 58, extracurricular: ['Swimming'] },
+    ];
+
+   
+    const mergedArray = [...students1, ...students2];
+
+    const filteredStudents = mergedArray.filter(student => student.grade >= 60);
+
+    const updatedStudents = filteredStudents.map(student => ({
+      ...student,
+      grade: student.grade * 1.05, 
+    }));
+
+    const firstBasketballPlayer = updatedStudents.find(student =>
+      student.extracurricular.includes('Basketball')
+    );
+
+    const allActivities = updatedStudents.reduce((acc, student) => {
+      return acc.concat(student.extracurricular);
+    }, []);
+
+  
+    setStudents(updatedStudents);
+    setBasketballPlayer(firstBasketballPlayer);
+    setActivities(allActivities);
+  }, []); 
+
+  return (
+    <div className="App">
+      <h1>Students after Filtering and Grade Update:</h1>
+      <ul>
+        {students.map((student, index) => (
+          <li key={index}>
+            {student.name} - {student.subject} - Grade: {student.grade.toFixed(2)}
+          </li>
+        ))}
+      </ul>
+
+      {basketballPlayer && (
+        <div>
+          <h2>First Basketball Player:</h2>
+          <p>{basketballPlayer.name}</p>
+        </div>
+      )}
+
+      <h2>All Extracurricular Activities:</h2>
+      <ul>
+        {activities.map((activity, index) => (
+          <li key={index}>{activity}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+
+
+/*
+import React from 'react';
+
+function App() {
+  
+  const furnitureData = [
+    {
+      id: 1,
+      name: 'Sofa',
+      price: '$500',
+      image: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcStxIlq1Vz_FLKdX-otKOQQ_iXjUwwzkSq1TF9Rv2IMXbmvWn0ERfbX8LybgQI7eGZgZbV4iM09p3Vb7Dxr86GlO9Td4TUY_hCo_z-1POryDR4RdZVWAkxEcm2VpoudZw&usqp=CAc', 
+    },
+    {
+      id: 2,
+      name: 'Dining Table',
+      price: '$700',
+      image: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRk5DntiOjm7I341t4wYP9jvxIhIAl-P4HOVsVI-gC9gB8um6Wik31YXFz0OhUh5erm2AKTrFLtg-Nt3UrWXtt8ZfOo9iWVsmQ6oI-gIZo', 
+    },
+    {
+      id: 3,
+      name: 'Chair',
+      price: '$150',
+      image: 'https://www.jiomart.com/images/product/original/rvsnvsfq4p/divano-modular-modern-india-boom-black-mesh-office-chair-product-images-orvsnvsfq4p-p600931739-0-202304261300.jpg', 
+    },
+    {
+      id: 4,
+      name: 'Bed',
+      price: '$1000',
+      image: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcS33bwcZI9Q0sEJnkUW5fWq5n2AxxC6ucSv-90Z1EjQrlP1bLh0IvL1p1n1lX547nwBehDg_b7MQ_hDwUTZHwt6bxD8I4q-4hqT2rzJ_D4K', 
+    },
+  ];
+
+  return (
+    <div className="App">
+      <h1>Furniture Items</h1>
+      <table border="1" style={{ width: '100%', textAlign: 'left' }}>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {furnitureData.map((item) => (
+            <tr key={item.id}>
+              <td>
+                <img 
+                  src={item.image} 
+                  alt={item.name} 
+                  style={{ width: '250px', height: '150px' }} 
+                />
+              </td>
+              <td style={{ padding: '25px', fontSize: '24px' }}> {}
+                {item.name}
+              </td>
+              <td style={{ padding: '25px', fontSize: '24px' }}> {}
+                {item.price}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default App;
+*/
